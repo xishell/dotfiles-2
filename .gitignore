@@ -1,18 +1,25 @@
-# Build and Release Folders
-bin-debug/
-bin-release/
-[Oo]bj/
-[Bb]in/
-
-# Other files and folders
-.settings/
-
-# Executables
-*.swf
-*.air
-*.ipa
-*.apk
-
-# Project files, i.e. `.project`, `.actionScriptProperties` and `.flexProperties`
-# should NOT be excluded as they contain compiler settings and other important
-# information for Eclipse / Flash Builder.
+*
+!.zshrc
+!.zprofile
+!.vimrc
+!.config
+!.config/conky
+!.config/conky/*
+!.config/alacritty
+!.config/alacritty/*
+!.config/kitty
+!.config/kitty/*
+!.config/copyq
+!.config/copyq/*
+!.config/gtk-3.0
+!.config/gtk-3.0/*
+!.config/neofetch
+!.config/neofetch/*
+!.config/polybar
+!.config/polybar/*
+!.config/rofi
+!.config/rofi/*
+!.config/picom
+!.config/picom/*
+!.config/quicktile.cfg
+!.config/redshift.conf
