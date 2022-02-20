@@ -1,0 +1,13 @@
+[Desktop Entry]
+Type=Application
+Exec=/home/madhur/.config/conky/launch.sh
+X-GNOME-Autostart-enabled=true
+NoDisplay=false
+Hidden=false
+Name=conky
+Name[en_US]=conky
+Comment=No description
+Comment[en_US]=No description
+X-GNOME-Autostart-Delay=5
+RunHook=0
+

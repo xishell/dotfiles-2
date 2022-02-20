@@ -1,0 +1,70 @@
+#theme = "plain"
+icons = "awesome"
+
+
+[[block]]
+block = "uptime"
+
+[[block]]
+block = "cpu"
+interval = 1
+format = "{utilization} {frequency}"
+
+
+[[block]]
+block = "custom"
+command = "/home/madhur/.config/i3status-rust/cputemp.sh" # assumes fontawesome icons
+interval = 1
+
+
+[[block]]
+block = "memory"
+format_mem = "{mem_used}/{mem_total}({mem_used_percents})"
+format_swap = "{swap_used}/{swap_total}({swap_used_percents})"
+display_type = "memory"
+icons = true
+clickable = true
+interval = 5
+warning_mem = 80
+warning_swap = 80
+critical_mem = 95
+critical_swap = 95
+
+[[block]]
+block = "net"
+device = "wlp1s0f0u1"
+format = "{ssid} {signal_strength} {ip} {speed_down;K*b} {speed_up;K*b}"
+interval = 5
+
+
+
+
+[[block]]
+block = "docker"
+interval = 2
+format = "{running}/{total}"
+
+
+
+
+
+
+
+
+
+
+[[block]]
+block = "sound"
+
+
+[[block]]
+block = "custom"
+command = "echo \uf011" # assumes fontawesome icons
+on_click = "rofi -modi 'Powermenu:/home/madhur/.config/rofi/powermenu.sh' -theme /home/madhur/.config/rofi/powermenu.rasi -show Powermenu -icon-theme Papirus"
+interval = "once"
+
+[[block]]
+block = "time"
+interval = 5
+format = "%a %d/%m %R"
+
