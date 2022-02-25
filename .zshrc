@@ -155,3 +155,5 @@ alias jssh="ssh -J jump "
 alias jscp="scp -o 'ProxyJump jump'"
 
 [ -f "/home/madhur/.ghcup/env" ] && source "/home/madhur/.ghcup/env" # ghcup-env
+
+export PATH=/home/madhur/etcd:/usr/local/vitess/bin:${PATH}

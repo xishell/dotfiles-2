@@ -1,4 +1,4 @@
-#theme = "plain"
+theme = "plain"
 icons = "awesome"
 
 
@@ -55,7 +55,12 @@ format = "{running}/{total}"
 
 [[block]]
 block = "sound"
+format = "{output_name} {volume}"
 
+[block.mappings]
+"alsa_output.usb-Microsoft_Microsoft_LifeChat_LX-6000-00.analog-stereo" = "🎧"
+"alsa_output.pci-0000_05_00.1.hdmi-stereo" = "🔈"
+"alsa_output.pci-0000_05_00.1.hdmi-stereo-extra2" = "🔈"
 
 [[block]]
 block = "custom"
@@ -66,5 +71,5 @@ interval = "once"
 [[block]]
 block = "time"
 interval = 5
-format = "%a %d/%m %R"
+format = "%a %d %b %R"
 

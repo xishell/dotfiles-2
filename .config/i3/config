@@ -54,14 +54,14 @@ bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOU
 floating_modifier $mod
 
 # start a terminal
-bindsym $mod+Return exec kitty
+bindsym $mod+Return exec alacritty
 
 # kill focused window
 bindsym $mod+Shift+q kill
 bindsym $mod+Shift+c kill
 
 # start dmenu (a program launcher)
-bindsym $mod+d exec "rofi -show drun"
+bindsym $mod+d exec "rofi -show drun -show-icons"
 # There also is the (new) i3-dmenu-desktop which only displays applications
 # shipping a .desktop file. It is a wrapper around dmenu, so you need that
 # installed.
@@ -198,15 +198,25 @@ bindsym $mod+r mode "resize"
 bar {
        # status_command i3status
         position top
+        #height 30
         i3bar_command i3bar --transparency
         colors {
                 background #00000000
                 #statusline #FFFFFF
+                 statusline #ffffff
+                separator #666666
+
+                focused_workspace  #4c7899 #285577 #ffffff
+                active_workspace   #333333 #5f676a #ffffff
+                inactive_workspace #333333 #222222 #888888
+                urgent_workspace   #2f343a #900000 #ffffff
+                binding_mode       #2f343a #900000 #ffffff
         }
         status_command /home/madhur/bin/i3status-rs /home/madhur/.config/i3status-rust/config.toml
         #tray_output primary
         font pango:DejaVu Sans Mono, FontAwesome 11
         workspace_min_width 60
+        #height 30
         #tray_padding 5
 }
 
@@ -233,25 +243,26 @@ focus_follows_mouse no
 
 
 # class                 border  backgr  text    indicator child_border
-client.focused          #004400 #22475A #F8F8F2 #44475A   #004400
+client.focused          #004400 #22475A #F8F8F2 #ffb86c   #004400
 client.focused_inactive #ffb86c #ffb86c #F8F8F2 #ffb86c   #ffb86c
-client.unfocused        #44475A #44475A #F8F8F2 #44475A   #44475A
+client.unfocused        #44475A #44475A #F8F8F2 #ffb86c   #44475A
 client.urgent           #FF5555 #FF5555 #282A36 #FF5555   #FF5555
-client.placeholder      #282A36 #282A36 #F8F8F2 #282A36   #282A3
+client.placeholder      #ffb86c #282A36 #F8F8F2 #ffb86c   #FF5555
 
-#gaps outer 10
-#gaps top 5
+
 gaps inner 10
-#gaps bottom 30
 smart_gaps on
+smart_borders on
 
 
-for_window [class=".*"] border pixel 0
+for_window [class=".*"] border pixel 1
 for_window [workspace=$ws1] floating enable
 for_window [instance="guake"] floating enable
 for_window [class="copyq"] floating enable
 for_window [class="xpad"] floating enable, move to workspace $ws1
 assign [class="xpad"] $ws1
+for_window [window_role="pop-up"] floating enable
+for_window [window_role="task_dialog"] floating enable
 
 ################
 # Screen Capture
@@ -269,12 +280,13 @@ bindsym $control+$shift+Print exec --no-startup-id flameshot gui
 ##############################
 # Scratchpad and window hiding
 ##############################
-exec --no-startup-id "kitty --class kitty_scratch"
-for_window [class="kitty_scratch"] move scratchpad, move position 0 30, resize set 3840 1800;
-bindsym F9 [class="kitty_scratch"] scratchpad show;
+
+exec --no-startup-id "alacritty --class alacritty_scratch,alacritty_scratch"
+for_window [class="alacritty_scratch"] move scratchpad, move position 0 30, resize set 3840 1800;
+bindsym F9 [class="alacritty_scratch"] scratchpad show;
 
 bindsym $mod+Shift+F1 move container to scratchpad
-bindsym $mod+F1 [class="^((?!kitty_scratch).)*$"] scratchpad show
+bindsym $mod+F1 [class="^((?!alacritty_scratch).)*$"] scratchpad show
 
 
 bindsym $mod+Tab mode "Cycle scratchpad"; scratchpad show
@@ -283,43 +295,9 @@ mode "Cycle scratchpad"{
   bindsym Return mode "default"
   bindsym Escape mode "default"
 }
-# Workspace 1 [terminal]
-#for_window [class="kitty"] move to workspace $ws2, focus
-#assign [class="kitty"] $ws2
-
-# Workspace 2 [browser]
-for_window [class="Vivaldi|Tor Browser|Tor Browser Launcher Settings"] move to workspace $ws2, focus
-
-# Workspace 3 [VScode]
-#for_window [class="Code"] move to workspace $ws3, focus
-
-#assign [class="Code"] $ws3
-
-# Workspace 4 [telegram]
-for_window [class="TelegramDesktop"] move to workspace $ws4, focus
-
-# Workspace 5 [media]
-for_window [class="Spotify"] move to workspace $ws5, focus
-
-# Workspace 6 [office]
-for_window [class="Wpspdf|Wpp|Wps|Et|obsidian"] move to workspace $ws6, focus
-
-# Workspace 7 [pc]
-for_window [class="lxappearance"] move to workspace $ws7, floating enable, focus
-#for_window [class="Thunar|thunar|transmission-gtk"] move to workspace $ws7, floating enable, resize set 800 px 550 px, move right -190px, focus
-for_window [class="Filezilla"] move to workspace $ws7, focus
-#for_window [class="qBittorrent"] move to workspace $ws7, focus
-
-# Workspace 8 [tools: {art, build, etc}]
-for_window [class="imv|krita|Blender"] move to workspace $ws8, focus
-for_window [class="discord"] move to workspace $ws8, focus
-
-# Workspace 9 [games]
-for_window [class="Steam|steam_proton*|steam_app*|Zenity|Lutris"] move to workspace $ws9, focus
-
-for_window [title="Steam*|Rockstar Games Launcher"] move to workspace $ws9, focus
-for_window [class="osu!.exe"] move to workspace $ws9, focus
-for_window [title="Steam Library Folders|Create or select new Steam library folder:*|Criar/Selecionar nova pasta de biblioteca Steam:*|Pastas de biblioteca Steam*"] move to workspace $ws9, floating enable, focus
+# Workspace 1 [zoom and notes]
+for_window [class="zoom"] move to workspace $ws1, focus, floating enable
+assign [class="zoom"] $ws1
 
 ###############
 # Rofi bindings
@@ -339,8 +317,6 @@ bindsym $mod+Shift+p exec i3lock -c 000000
 # Swap between current and last workspace (Mod+Tab)
 #bindcode $mod+23 workspace back_and_forth
 
-# Borders for windows
-for_window [class=".*"] border pixel 0
 
 
 #############
@@ -368,5 +344,6 @@ exec --no-startup-id "copyq"
 exec --no-startup-id "guake"
 exec --no-startup-id "xpad"
 exec --no-startup-id "xfsettingsd --daemon"
+exec --no-startup-id "indicator-sound-switcher"
 exec "/opt/paloaltonetworks/globalprotect/PanGPUI"
 exec "redshift-gtk"

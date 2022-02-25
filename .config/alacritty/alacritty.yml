@@ -14,7 +14,7 @@
   # TERM: xterm-256color-italic
 
 window:
-  opacity: 0.7
+  opacity: 0.75
   # Window dimensions (changes require restart)
   #
   # Specified in number of columns/lines, not pixels. If both are zero this
@@ -91,7 +91,7 @@ font:
     # style: "Medium Italic"
 
   # Point size of the font
-  size: 10.0
+  size: 11.0
 
   # Offset is the extra space around each character. offset.y can be thought of
   # as modifying the linespacing, and offset.x as modifying the letter spacing.
@@ -134,11 +134,11 @@ custom_cursor_colors: true
 colors:
   # Default colors
   primary:
-    background: '0x000000'
+    background: '0x171717'
     foreground: '0xffffff'
   # Normal colors
   normal:
-    black:   '0x000000'
+    black:   '0x171717'
     red:     '0xcd0000'
     green:   '0x00cd00'
     yellow:  '0xcdcd00'
@@ -321,6 +321,7 @@ bell:
 #   - AppKeypad
 #
 key_bindings:
+  - { key: K,        mods: Control,       action: ClearHistory                        }
   - { key: V,        mods: Command,       action: Paste                        }
   - { key: C,        mods: Command,       action: Copy                         }
   - { key: Q,        mods: Command,       action: Quit                         }
@@ -422,7 +423,7 @@ selection:
   semantic_escape_chars: ",│`|:\"' ()[]{}<>"
 
   # When set to `true`, selected text will be copied to the primary clipboard.
-  save_to_clipboard: false
+  save_to_clipboard: true
 
 # Mouse bindings
 #
@@ -449,7 +450,7 @@ cursor:
   #   - ▇ Block
   #   - _ Underline
   #   - | Beam
-  style: Block
+  style: Beam
 
   # If this is `true`, the cursor will be rendered as a hollow box when the
   # window is not focused.
@@ -489,7 +490,7 @@ debug:
 # You can set shell.program to the path of your favorite shell, e.g. /bin/fish.
 # Entries in shell.args are passed unmodified as arguments to the shell.
 shell:
-  program: /usr/bin/zsh
+  program: "/usr/bin/zsh"
  
 
 # vim: nospell

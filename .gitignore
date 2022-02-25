@@ -36,5 +36,9 @@
 !.config/dunst/*
 !.config/autostart
 !.config/autostart/*
+!.config/bspwm
+!.config/bspwm/*
+!.config/sxhkd
+!.config/sxhkd/*
 !.config/quicktile.cfg
 !.config/redshift.conf
