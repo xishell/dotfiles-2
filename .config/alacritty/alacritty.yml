@@ -443,14 +443,13 @@ selection:
 mouse_bindings:
   - { mouse: Middle, action: PasteSelection }
 
+
+
 cursor:
-  # Cursor style
-  #
-  # Values for 'style':
-  #   - ▇ Block
-  #   - _ Underline
-  #   - | Beam
-  style: Beam
+  style: 
+    shape: Beam
+    blinking: Always
+  blink_interval: 500  
 
   # If this is `true`, the cursor will be rendered as a hollow box when the
   # window is not focused.

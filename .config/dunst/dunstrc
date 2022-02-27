@@ -28,6 +28,23 @@
     frame_width = 1
     frame_color = "#abb2bf66"
 
+      ### Icons ###
+    icon_position = left
+    max_icon_size = 64
+    
+      ### History ###
+    sticky_history = yes
+    history_length = 20
+
+      ### Misc/Advanced ###
+    dmenu = /usr/bin/alacritty -e fzf:
+    browser = linkhandler
+    always_run_script = false
+    title = Dunst
+    class = Dunst
+    startup_notification = false
+    force_xinerama = false
+
 [shortcuts]
     close = ctrl+space
     close_all = ctrl+shift+space
@@ -37,6 +54,7 @@
 [urgency_low]
     background = "#282c3422"
     foreground = "#abb2bf"
+     icon = "~/.config/dunst/icons/low.svg"
     timeout = 5
 
 [urgency_normal]
@@ -48,3 +66,4 @@
     background = "#dc322f22"
     foreground = "#abb2bf"
     timeout = 0
+  icon = "~/.config/dunst/icons/critical.svg"
