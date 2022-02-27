@@ -13,7 +13,7 @@
 
 
 
-<div style="float:left;width:100%">
+<div style="float:left">
 <img alt=conky-core height=700px src=https://github.com/madhur/dotfiles/blob/6adb3e8ec0461d97e53f511651f06818bf1373a6/screenshot.png />
 </div>
 <div style="float:clear"></div>
