@@ -8,6 +8,8 @@
 !.i3status.conf
 !.zshenv
 !.zlogin
+!screenshot.png
+!README.md
 !.config
 !.config/conky
 !.config/conky/*
