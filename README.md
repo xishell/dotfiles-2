@@ -1,4 +1,4 @@
-## My personal Desktop
+## My personal Desktop dotfiles (Linux)
 
 ### Tools used
 
