@@ -11,7 +11,7 @@ super + d
 	rofi  -show drun -show-icons
 
 # program launcher
-super + r
+super + shift + d
 	rofi  -show run -show-icons
 
 # make sxhkd reload its configuration files:

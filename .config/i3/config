@@ -53,7 +53,7 @@ set $ws9 "9"
 set $ws10 "10"
 
 # exit i3 (logs you out of your X session)
-#bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -B 'Yes, exit i3' 'i3-msg exit'"
+bindsym $mod+Shift+q exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -B 'Yes, exit i3' 'i3-msg exit'"
 
 #bindsym $mod+Delete exec i3-exit
 for_window [class="I3-exit"] floating enable border normal
@@ -119,11 +119,11 @@ set_from_resource	$color12	color12
 set_from_resource	$color13	color13
 set_from_resource	$color14	color14
 set_from_resource	$color15	color15
-focus_follows_mouse no
+focus_follows_mouse yes
 
 
 # class                 border  backgr  text    indicator child_border
-client.focused          #004400 #22475A #F8F8F2 #ffb86c   #004400
+client.focused          #004400 #22475A #F8F8F2 #ffb86c   #5e81ac
 client.focused_inactive #ffb86c #ffb86c #F8F8F2 #ffb86c   #44475A
 client.unfocused        #44475A #44475A #F8F8F2 #ffb86c   #44475A
 client.urgent           #FF5555 #FF5555 #282A36 #FF5555   #FF5555
@@ -149,36 +149,45 @@ for_window [window_role="task_dialog"] floating enable
 # Scratchpad and window hiding
 ##############################
 
-exec --no-startup-id "alacritty --class alacritty_scratch,alacritty_scratch"
-for_window [class="alacritty_scratch"] move scratchpad, move position 0 30, resize set 3840 1800;
-bindsym F9 [class="alacritty_scratch"] scratchpad show;
+#exec --no-startup-id "alacritty --class alacritty_scratch,alacritty_scratch"
+#for_window [class="alacritty_scratch"] move scratchpad, move position 0 30, resize set 3840 1800;
+#bindsym F9 [class="alacritty_scratch"] scratchpad show;
 
 bindsym $mod+Shift+F1 move container to scratchpad
 bindsym $mod+F1 [class="^((?!alacritty_scratch).)*$"] scratchpad show
 
 
-bindsym $mod+Tab mode "Cycle scratchpad"; scratchpad show
-mode "Cycle scratchpad"{     
-  bindsym $mod+Tab scratchpad show; scratchpad show     
-  bindsym Return mode "default"
-  bindsym Escape mode "default"
-}
+# bindsym $mod+Tab mode "Cycle scratchpad"; scratchpad show
+# mode "Cycle scratchpad"{     
+#   bindsym $mod+Tab scratchpad show; scratchpad show     
+#   bindsym Return mode "default"
+#   bindsym Escape mode "default"
+# }
 # Workspace 1 [zoom and notes]
 for_window [class="zoom"] move to workspace $ws1, focus, floating enable
 assign [class="zoom"] $ws1
 
 # up
-exec --no-startup-id nm-applet
-exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
+exec_always --no-startup-id "killall nm-applet"
+exec_always --no-startup-id "nm-applet &"
+exec_always --no-startup-id "killall xfce-polkit"
+exec_always --no-startup-id "/usr/libexec/xfce-polkit &"
+exec_always --no-startup-id "killall gnome-keyring"
+exec_always --no-startup-id "gnome-keyring &"
 exec_always --no-startup-id "/home/madhur/.config/picom/launch.sh"
 exec_always --no-startup-id "/home/madhur/.config/conky/launch.sh"
 exec_always --no-startup-id feh --bg-fill /home/madhur/Desktop/wallpaper.png 
-exec_always --no-startup-id "dunst"
-exec --no-startup-id "gnome-keyring"
-exec --no-startup-id "copyq"
-exec --no-startup-id "guake"
-exec --no-startup-id "xpad"
-exec --no-startup-id "xfsettingsd --daemon"
-exec --no-startup-id "indicator-sound-switcher"
-exec "/opt/paloaltonetworks/globalprotect/PanGPUI"
-exec "redshift-gtk"
+exec_always --no-startup-id "killall dunst"
+exec_always --no-startup-id "dunst &"
+exec_always --no-startup-id "killall copyq"
+exec_always --no-startup-id "copyq &"
+exec_always --no-startup-id "killall guake"
+exec_always --no-startup-id "guake &"
+exec_always --no-startup-id "killall xpad"
+exec_always --no-startup-id "xpad &"
+exec_always --no-startup-id "killall xfsettingsd"
+exec_always --no-startup-id "xfsettingsd --daemon &"
+exec_always --no-startup-id "killall indicator-sound-switcher"
+exec_always --no-startup-id "indicator-sound-switcher &"
+exec_always --no-startup-id "killall PanGPUI"
+exec_always --no-startup-id "/opt/paloaltonetworks/globalprotect/PanGPUI &"

@@ -19,7 +19,7 @@ interval = 1
 
 [[block]]
 block = "memory"
-format_mem = "{mem_used}/{mem_total}({mem_used_percents})"
+format_mem = " {mem_used_percents} ({mem_used}/{mem_total})"
 format_swap = "{swap_used}/{swap_total}({swap_used_percents})"
 display_type = "memory"
 icons = true
@@ -31,27 +31,25 @@ critical_mem = 95
 critical_swap = 95
 
 [[block]]
+block = "disk_space"
+path = "/"
+info_type = "used"
+format = "{icon}  {percentage} ({used} / {total})"
+alert_absolute = false
+unit = "GB"
+alert = 90
+warning = 80
+
+[[block]]
 block = "net"
 device = "wlp1s0f0u1"
 format = "{ssid} {signal_strength} {ip} {speed_down;K*b} {speed_up;K*b}"
 interval = 5
 
-
-
-
 [[block]]
 block = "docker"
 interval = 2
 format = "{running}/{total}"
-
-
-
-
-
-
-
-
-
 
 [[block]]
 block = "sound"
