@@ -1,14 +1,9 @@
-export ZSH="$HOME/.oh-my-zsh"
+# .bashrc
 
-ZSH_THEME="madhur"
-
-autoload -Uz compinit
-compinit
-
-#source <(kubectl completion zsh)
-plugins=(git zsh-syntax-highlighting zsh-autosuggestions autojump kubectl zsh-kubectl-prompt)
-
-source $ZSH/oh-my-zsh.sh
+# Source global definitions
+if [ -f /etc/bashrc ]; then
+	. /etc/bashrc
+fi
 
 source ~/kube-ps1.sh
 
@@ -27,11 +22,57 @@ export SYSTEMD_PAGER=
 
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
+#THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
+export SDKMAN_DIR="$HOME/.sdkman"
+[[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
+
+bind 'set show-all-if-ambiguous on'
+bind 'TAB:menu-complete'
+
+# If not running interactively, don't do anything
 [ -z "$PS1" ] && return
 
+export LESS_TERMCAP_mb=$'\E[01;31m'
+export LESS_TERMCAP_md=$'\E[01;31m'
+export LESS_TERMCAP_me=$'\E[0m'
+export LESS_TERMCAP_se=$'\E[0m'
+export LESS_TERMCAP_so=$'\E[01;44;33m'
+export LESS_TERMCAP_ue=$'\E[0m'
+export LESS_TERMCAP_us=$'\E[01;32m'
+
+RESET="\[\033[0m\]"
+RED="\[\033[0;31m\]"
+GREEN="\[\033[01;32m\]"
+BLUE="\[\033[01;36m\]"
+YELLOW="\[\033[0;33m\]"
+ 
+PS_LINE=`printf -- '- %.0s' {1..200}`
+function parse_git_branch {
+
+  echo -ne "\033]0;${PWD}\007" #set title of prompt
+  PS_BRANCH=''
+  PS_FILL=${PS_LINE:0:$COLUMNS}
+  if [ -d .svn ]; then
+    PS_BRANCH="(svn r$(svn info|awk '/Revision/{print $2}'))"
+    return
+  elif [ -f _FOSSIL_ -o -f .fslckout ]; then
+    PS_BRANCH="(fossil $(fossil status|awk '/tags/{print $2}')) "
+    return
+  fi
+  ref=$(git symbolic-ref HEAD 2> /dev/null) || return
+  #PS_BRANCH="(git ${ref#refs/heads/}) "
+  PS_BRANCH="(${ref#refs/heads/}) "
+}
+PROMPT_COMMAND=parse_git_branch
+PS_INFO="$GREEN\u@\h$RESET:$BLUE\w"
+PS_GIT="$YELLOW\$PS_BRANCH"
 KUBE_PS1_CTX_COLOR=yellow
 KUBE_PS1_NS_COLOR=yellow
+#PS_TIME="\[\033[\$()G\] $RED[\t]"
+export PS1="\[\033[0G\]${PS_INFO} ${PS_GIT}$(kube_ps1) \n${RESET}\$ "
+export SUDO_PS1="\[\033[0G\]${PS_INFO} ${PS_GIT}\n${RESET}# "
 
 export CLICOLOR=1
 
@@ -84,7 +125,7 @@ alias ..="cd .."
 alias ...="cd ../.."
 alias ....="cd ../../.."
 alias .....="cd ../../../.."
-alias ll="ls -lah"
+alias ll="ls -l"
 alias la="ls -a"
 alias grep='grep --color=auto'
 alias k='kubectl'
@@ -94,6 +135,20 @@ alias prettyjson='python -m json.tool'
 function perf {
   curl -o /dev/null -s -w "%{time_connect} + %{time_starttransfer} = %{time_total}\n" "$1"
 }
+
+# HSTR configuration - add this to ~/.bashrc
+alias hh=hstr                    # hh to be alias for hstr
+export HSTR_CONFIG=hicolor       # get more colors
+shopt -s histappend              # append new history items to .bash_history
+export HISTCONTROL=ignorespace   # leading space hides commands from history
+export HISTFILESIZE=10000        # increase history file size (default is 500)
+export HISTSIZE=${HISTFILESIZE}  # increase history size (default is 500)
+# ensure synchronization between bash memory and history file
+export PROMPT_COMMAND="history -a; history -n; ${PROMPT_COMMAND}"
+# if this is interactive shell, then bind hstr to Ctrl-r (for Vi mode check doc)
+if [[ $- =~ .*i.* ]]; then bind '"\C-r": "\C-a hstr -- \C-j"'; fi
+# if this is interactive shell, then bind 'kill last command' to Ctrl-x k
+if [[ $- =~ .*i.* ]]; then bind '"\C-xk": "\C-a hstr -k \C-j"'; fi
 
 extract () {
    if [ -f $1 ] ; then
@@ -132,6 +187,21 @@ export PATH=$ANDROID_HOME/platform-tools:$PATH
 export PATH=$ANDROID_HOME/platform-tools/bin:$PATHexport PATH=$ANDROID_HOME/tools:$PATH
 export PATH=$ANDROID_HOME/tools/bin:$PATHexport PATH=$ANDROID_HOME/build-tools/32.0.0:$PATH
 export PATH=$ANDROID_HOME/build-tools/32.0.0/bin:$PATH
+[ -f ~/.fzf.bash ] && source ~/.fzf.bash
+
+export KUBECONFIG=~/.kube/config:~/.kube/eks-pt
+
+export PATH=$ANDROID_HOME/bundle-tool:$PATH
+#PS1='[\u@\h \W $(kube_ps1)]\$ '
+# Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
+export PATH="$PATH:$HOME/.rvm/bin"
+
+
+export ANDROID_HOME=/home/madhur/Android/Sdk
+export PATH=$ANDROID_HOME/platform-tools:$PATH
+export PATH=$ANDROID_HOME/platform-tools/bin:$PATHexport PATH=$ANDROID_HOME/tools:$PATH
+export PATH=$ANDROID_HOME/tools/bin:$PATHexport PATH=$ANDROID_HOME/build-tools/32.0.0:$PATH
+export PATH=$ANDROID_HOME/build-tools/32.0.0/bin:$PATH
 
 export KUBECONFIG=~/.kube/config:~/.kube/eks-pt
 
@@ -139,22 +209,13 @@ export PATH=$ANDROID_HOME/bundle-tool:$PATH
 
 export SDKMAN_DIR="$HOME/.sdkman"
 [[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
-RPROMPT='%{$fg[blue]%} (%T) ($ZSH_KUBECTL_PROMPT)%{$reset_color%}'
+RPROMPT='%{$fg[blue]%}($ZSH_KUBECTL_PROMPT)%{$reset_color%}'
 
 export NODE_ENV=development
 export GLOBAL_AGENT_HTTP_PROXY=http://127.0.0.1:8888
 # Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
 export PATH="$PATH:$HOME/.rvm/bin"
 export PATH=/usr/bin:$PATH:/usr/local/go/bin:/home/madhur/.cargo/bin
-export PKG_CONFIG_PATH=/usr/lib64/pkgconfig:/usr/share/pkgconfig:/usr/share/wayland-protocols:/usr/local/include:/usr/local/include/libbamf3:/usr/local/share:/usr/local/share/vala/vapi
-
-# handle ssh - agent and ssh-add
-export $(gnome-keyring-daemon --daemonize --start)
-
-alias jssh="ssh -J jump "
-alias jscp="scp -o 'ProxyJump jump'"
-
-[ -f "/home/madhur/.ghcup/env" ] && source "/home/madhur/.ghcup/env" # ghcup-env
+. "$HOME/.cargo/env"
 
 export PATH=/home/madhur/etcd:/usr/local/vitess/bin:${PATH}
-export _JAVA_AWT_WM_NONREPARENTING=1

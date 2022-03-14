@@ -16,10 +16,10 @@ super + v
 
 
 super + s
-	i3-msg layout stacking
+	i3-msg layout toggle stacking tabbed
 
 super + w
-	i3-msg layout tabbed
+	i3-msg layout toggle tabbed stacking
 
 super + e
 	i3-msg layout toggle split
@@ -43,8 +43,8 @@ super + c
 #----- WINDOW CHANGE FOCUS
 #------------------------------------------------------------------------------
 
-super + {h,j,k,l}
-	i3-msg focus {left,down,up,right}
+#super + {h,j,k,l}
+#	i3-msg focus {left,down,up,right}
 
 super + {Left,Down,Up,Right}
 	i3-msg focus {left,down,up,right}

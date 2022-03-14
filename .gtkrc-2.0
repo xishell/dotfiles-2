@@ -1,0 +1,10 @@
+
+###############################################
+# Created by cinnamon-settings - please do not edit or reformat.
+#
+style "cs-scrollbar-style" {
+GtkScrollbar::slider-width = 22
+}
+
+class "GtkScrollbar" style "cs-scrollbar-style"
+###############################################

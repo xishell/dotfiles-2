@@ -4,7 +4,7 @@
 
 # terminal emulator
 super + Return
-	alacritty
+	terminator
 
 # program launcher
 super + d
@@ -36,7 +36,7 @@ ctrl + shift + F13
 
 # lockscreen
 alt + shift + x
-    betterlockscreen -l blur
+    /home/madhur/bin/lockscreen.sh
 
 alt + Tab
 	rofi -show windowcd -show-icons
