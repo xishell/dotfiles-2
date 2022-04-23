@@ -147,13 +147,13 @@ smart_borders on
 
 for_window [class=".*"] border pixel 1
 for_window [class="Guake"] border pixel 0 #dont want borders on dropdown terminal
-for_window [workspace=$ws1] floating enable
+#for_window [workspace=$ws1] floating enable
 for_window [instance="guake"] floating enable
 for_window [class="copyq"] floating enable
 for_window [class="xpad"] floating enable, move to workspace $ws1
 assign [class="xpad"] $ws1
-for_window [window_role="pop-up"] floating enable
-for_window [window_role="task_dialog"] floating enable
+#for_window [window_role="pop-up"] floating enable
+#for_window [window_role="task_dialog"] floating enable
 
 ##########################################################################################################################
 ##################################### OPEN SPECIFIC APPLICATIONS IN FLOATING MODE ########################################
@@ -185,6 +185,7 @@ for_window [class="Xfce4-about"] floating enable
 for_window [class="Xfce4-appfinder"] floating enable
 for_window [class="Pulseeffects"] floating enable
 for_window [class="Pulseaudio-equalizer-gtk"] floating enable
+for_window [class="feh"] floating enable
 
 
 ##############################
@@ -208,7 +209,7 @@ exec --no-startup-id "killall gnome-keyring"
 exec --no-startup-id "gnome-keyring &"
 exec --no-startup-id "/home/madhur/.config/picom/launch.sh"
 exec --no-startup-id "/home/madhur/.config/conky/launch.sh"
-exec --no-startup-id feh --bg-fill /home/madhur/Desktop/wallpaper.png 
+exec --no-startup-id feh --bg-fill /home/madhur/Desktop/wallpaper.jpg
 exec --no-startup-id "killall dunst"
 exec --no-startup-id "dunst &"
 exec --no-startup-id "killall copyq"
@@ -223,3 +224,4 @@ exec --no-startup-id "killall indicator-sound-switcher"
 exec --no-startup-id "indicator-sound-switcher &"
 exec --no-startup-id "killall PanGPUI"
 exec --no-startup-id "/opt/paloaltonetworks/globalprotect/PanGPUI &"
+exec --no-startup-id "flashfocus &"

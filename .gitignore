@@ -11,6 +11,7 @@
 !screenshot.png
 !README.md
 !.bashrc
+!.nanorc
 !.bash_profile
 !.profile
 !kube-ps1.sh
@@ -57,5 +58,9 @@
 !.config/gtk-2.0/*
 !.config/gtk-4.0
 !.config/gtk-4.0/*
+!.config/guake
+!.config/guake/*
+!.config/htop
+!.config/htop/*
 !.config/quicktile.cfg
 !.config/redshift.conf

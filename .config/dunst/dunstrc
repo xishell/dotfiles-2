@@ -44,6 +44,7 @@
     class = Dunst
     startup_notification = false
     force_xinerama = false
+    timeout = 5
 
 [shortcuts]
     close = ctrl+space
@@ -60,7 +61,7 @@
 [urgency_normal]
     background = "#4b526322"
     foreground = "#abb2bf"
-    timeout = 20
+    timeout = 5
 
 [urgency_critical]
     background = "#dc322f22"
