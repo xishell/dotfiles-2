@@ -2,14 +2,16 @@
 
 ### Tools used
 
-* [bspwm](https://github.com/baskerville/bspwm)
+* [bspwm](https://github.com/baskerville/bspwm) / [i3](https://i3wm.org/)
 * [sxhkd](https://github.com/baskerville/sxhkd)
 * [picom](https://github.com/yshui/picom)
 * [rofi](https://github.com/davatorium/rofi)
-* [polybar](https://github.com/polybar/polybar)
-* [Alacritty Terminal](https://github.com/alacritty/alacritty)
+* [polybar](https://github.com/polybar/polybar) / [i3 status rust](https://github.com/greshake/i3status-rust)
+* [Alacritty Terminal](https://github.com/alacritty/alacritty) / [Guake](https://github.com/Guake/guake)
 * [Conky](https://github.com/brndnmtthws/conky)
 * [Betterlockscreen](https://github.com/betterlockscreen/betterlockscreen)
+* [dunst](https://github.com/dunst-project/dunst)
+
 
 
 
